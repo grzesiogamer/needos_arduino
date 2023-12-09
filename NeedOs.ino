@@ -2,7 +2,7 @@ int ResetPin = 4;
 const int ledPin = 13;
 const char *password = "needadmin"; // hasło
 /*
-Jeżeli chcesz zmienić hasło zjedz do funkcji sprawdzHaslo() i zmień bufor na dlugość hasła + 1
+Jeżeli chcesz zmienić hasło zjedz do funkcji sprawdzHaslo() i zmień bufor[10] na bufor[dlugość hasła + 1]
 Pamiętając aby zmienić tu hasło
 
 */
@@ -16,10 +16,10 @@ void setup() {
   delay(500);
   Serial.println("NeedOS - By BatteryGamer and Blackneeed");
   delay(100);
-  Serial.println(char(169) + "Copyright 2023 - BatteryGamer, all Copyrights restricted");
+  Serial.println("Copyright 2023 - BatteryGamer, all Copyrights restricted");
   delay(1000);
   Serial.println("Loading complete...");
-  Serial.print()"\n");
+  Serial.print("\n");
   Serial.print("Enter your password: ");
 
   digitalWrite(ResetPin, HIGH);
@@ -110,14 +110,14 @@ bool sprawdzHaslo() {
       index = 0;
 
       if (strcmp(bufor, password) == 0) {
-        Serial.println("LoginManager: Password correct, Access granted.");
+        Serial.println("\nLoginManager: Password correct, Access granted.");
         digitalWrite(ledPin, HIGH); // Włącz diodę LED
         delay(500);
         digitalWrite(ledPin, LOW); // Włącz diodę LED
         Serial.println("Type \"help\" for more informations.");
         return true;
       } else {
-        Serial.println("LoginManager: Incorrect password, please");
+        Serial.println("\nLoginManager: Incorrect password, please");
         Serial.println("try to enter the correct details again.");
       }
     } else {
