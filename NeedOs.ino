@@ -1,22 +1,26 @@
 int ResetPin = 4;
 const int ledPin = 13;
-const char *haslo = "needadmin"; // Password
+const char *password = "needadmin"; // hasło
+/*
+Jeżeli chcesz zmienić hasło zjedz do funkcji sprawdzHaslo() i zmień bufor na dlugość hasła + 1
+Pamiętając aby zmienić tu hasło
+
+*/
 
 bool isAuthenticated = false;
 
 void setup() {
   Serial.begin(9600);
   delay(2000);
-  Serial.println("Loading.....");
+  Serial.println("Loading...");
   delay(500);
-  Serial.println("\rNeedOs - By BatteryGamer and Blackneeed");
+  Serial.println("NeedOS - By BatteryGamer and Blackneeed");
   delay(100);
-  Serial.println("\rCopyrights 2023 - BatteryGamer");
+  Serial.println(char(169) + "Copyright 2023 - BatteryGamer, all Copyrights restricted");
   delay(1000);
-  Serial.println("\rLoading Complete.");
-  Serial.println("\n");
-  Serial.println("\n");
-  Serial.println("\rType your password...");
+  Serial.println("Loading complete...");
+  Serial.print()"\n");
+  Serial.print("Enter your password: ");
 
   digitalWrite(ResetPin, HIGH);
   pinMode(ResetPin, OUTPUT);
@@ -38,36 +42,34 @@ void loop() {
         Serial.print(flashSize / 1024); // Konwersja na kilobajty
         Serial.println(" KB");
         Serial.println("\n");
-        Serial.println("\n");
-      } else if (command == "reboot") {
-        // Kod obsługujący polecenie reboot
+      } else if (command == "reboot" or command == "reset" or command == "restart") {
+        // Kod obsługujący polecenie reboot + reset + restart
         Serial.println("\n");
         Serial.println("Restartowanie Arduino...");
         delay(1000);
         digitalWrite(ResetPin, LOW);
         Serial.println("\n");
-      } else if (command == "clr") {
-        // Kod obsługujący polecenie clr
+      } else if (command == "clr" or command == "cls") {
+        // Kod obsługujący polecenie clr + cls
         Serial.println("\n");
         Serial.println("\n");
         Serial.println("\n");
       } else if (command == "readme") {
         // Kod obsługujący polecenie readme
         Serial.println("\n");
-        Serial.println("NeedOs - New Operating System for your Arduino");
+        Serial.println("NeedOS - New Operating System for your Arduino");
         Serial.println("Version 2023.12");
-        Serial.println("ChangeLogs:");
+        Serial.println("Changelog:");
         Serial.println("-- Fixed Bugs");
         Serial.println("-- Adding VGA Support - In progress");
         Serial.println("-- Added new commands");
-        Serial.println("-- Support: Arduino Uno only at right moment");
+        Serial.println("-- Support: Arduino UNO only supported at the moment");
         Serial.println("-- Added LoginManager");
         Serial.println("\n");
       } else if (command == "help") {
         // Kod obsługujący polecenie help
         Serial.println("\n");
         Serial.println("Available Commands:");
-        Serial.println("readme - Display system version and change logs");
         Serial.println("help - Display available commands");
         Serial.println("reboot - Restart the system");
         Serial.println("info - Display system information");
@@ -89,8 +91,7 @@ void loop() {
         Serial.println("\n");
       } else {
         Serial.println("\n");
-        Serial.println("Unknown command. Type 'help' for available commands.");
-        Serial.println("Error! Command not found!");
+        Serial.println("Unknown command. Type \"help\" for available commands.");
         Serial.println("\n");
       }
     }
@@ -98,7 +99,7 @@ void loop() {
 }
 
 bool sprawdzHaslo() {
-  static char bufor[10]; // Zmienione na długość hasła "needadmin"
+  static char bufor[10]; // Zmienione na długość hasła "needadmin" + 1
   static byte index = 0;
 
   while (Serial.available() > 0) {
@@ -108,12 +109,12 @@ bool sprawdzHaslo() {
       bufor[index] = '\0';
       index = 0;
 
-      if (strcmp(bufor, haslo) == 0) {
-        Serial.println("LoginManager: Password Correct, Access Granted");
+      if (strcmp(bufor, password) == 0) {
+        Serial.println("LoginManager: Password correct, Access granted.");
         digitalWrite(ledPin, HIGH); // Włącz diodę LED
         delay(500);
         digitalWrite(ledPin, LOW); // Włącz diodę LED
-        Serial.println("\rType Help for more informations.");
+        Serial.println("Type \"help\" for more informations.");
         return true;
       } else {
         Serial.println("LoginManager: Incorrect password, please");
