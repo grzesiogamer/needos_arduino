@@ -1,5 +1,5 @@
 # NeedOs
-NeedOS is an operating system for the arduino made for specifically the arduino uno
+NeedOS is an operating system for a device called Arduino mainly maintained for the Arduino UNO
  
 ## Commands:
 - version: shows the current build of NeedOS
@@ -12,5 +12,7 @@ NeedOS is an operating system for the arduino made for specifically the arduino 
  
 *Connect a jumper wire to the 4pin and respin for the reboot command to work
  
+If you want to upload the code disconnect the reset wire (jumper wire P4 and PRES) then connect it after it uploaded else it will not compile
+
 # Credits: BatteryGamer, Blackneeed
-# Hope you enjoy our operating system please give a star if you could.
+# Hope you enjoy our operating system, please give a star if you could.
